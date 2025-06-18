@@ -5,35 +5,49 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <ion-item>
-    <ion-input
-      [(ngModel)]="pokemonName"
-      placeholder="Digite o nome do Pokémon"
-      (keyup.enter)="loadPokemon()"
-    ></ion-input>
-    <ion-button (click)="loadPokemon()">Buscar</ion-button>
-  </ion-item>
-
-  <ion-card *ngIf="pokemon">
-    <ion-card-header>
-      <ion-card-title style="font-weight: bold; font-size: 22px"
-        >{{ pokemon.name | titlecase }}</ion-card-title
+  <div class="search-container">
+    <ion-item lines="none" class="search-bar">
+      <ion-input
+        [(ngModel)]="pokemonName"
+        placeholder="Digite o nome do Pokémon"
+        (keyup.enter)="loadPokemon()"
+        clearInput
+        inputmode="search"
+      ></ion-input>
+      <ion-button
+        shape="round"
+        fill="solid"
+        color="primary"
+        (click)="loadPokemon()"
+        >Buscar</ion-button
       >
-    </ion-card-header>
-    <ion-card-content>
-      <img
-        [src]="pokemon.sprites?.front_default"
-        [alt]="pokemon.name"
-        style="width: 250px; height: 250px; display: block; margin: 0 auto"
-      />
-    </ion-card-content>
-  </ion-card>
+      <ion-icon name="search-outline"></ion-icon>
+    </ion-item>
+  </div>
 
-  <ion-card *ngIf="error">
-    <ion-card-content style="color: red"> {{ error }} </ion-card-content>
-  </ion-card>
+  <div class="center-content">
+    <ion-card *ngIf="pokemon" class="pokemon-card animate-in">
+      <ion-card-header>
+        <ion-card-title>{{ pokemon.name | titlecase }}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <img
+          [src]="pokemon.sprites?.front_default"
+          [alt]="pokemon.name"
+          class="poke-img"
+        />
+      </ion-card-content>
+    </ion-card>
 
-  <ion-card *ngIf="loading">
-    <ion-card-content> Carregando... </ion-card-content>
-  </ion-card>
+    <ion-card *ngIf="error" class="error-card animate-in">
+      <ion-card-content class="error"> {{ error }} </ion-card-content>
+    </ion-card>
+
+    <ion-card *ngIf="loading" class="loading-card animate-in">
+      <ion-card-content>
+        <ion-spinner name="crescent"></ion-spinner>
+        <span class="loading-text">Carregando...</span>
+      </ion-card-content>
+    </ion-card>
+  </div>
 </ion-content>
