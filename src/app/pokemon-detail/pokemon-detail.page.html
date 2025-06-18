@@ -1,0 +1,80 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Detalhes do Pokémon</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-button routerLink="/home" fill="clear" color="primary">
+    ← Voltar
+  </ion-button>
+
+  <ion-card *ngIf="pokemon">
+    <ion-card-header>
+      <ion-card-title>{{ pokemon.name | titlecase }}</ion-card-title>
+      <div>
+        <span *ngFor="let t of pokemon.types" class="type-badge">
+          {{ t.type.name | titlecase }}
+        </span>
+      </div>
+    </ion-card-header>
+    <ion-card-content>
+      <img
+        [src]="pokemon.sprites?.other?.['official-artwork']?.front_default || pokemon.sprites?.front_default"
+        [alt]="pokemon.name"
+        class="poke-img"
+      />
+      <ul class="poke-details">
+        <li><strong>ID:</strong> {{ pokemon.id }}</li>
+        <li><strong>Altura:</strong> {{ pokemon.height / 10 }} m</li>
+        <li><strong>Peso:</strong> {{ pokemon.weight / 10 }} kg</li>
+        <li>
+          <strong>Habilidades:</strong>
+          <span *ngFor="let ab of pokemon.abilities; let last = last">
+            {{ ab.ability.name | titlecase }}<span *ngIf="!last">, </span>
+          </span>
+        </li>
+        <li>
+          <strong>Experiência base:</strong> {{ pokemon.base_experience }}
+        </li>
+        <li><strong>Ordem:</strong> {{ pokemon.order }}</li>
+        <li>
+          <strong>Sprites:</strong>
+          <div class="sprite-list">
+            <img
+              *ngIf="pokemon.sprites?.front_default"
+              [src]="pokemon.sprites.front_default"
+              alt="Front"
+            />
+            <img
+              *ngIf="pokemon.sprites?.back_default"
+              [src]="pokemon.sprites.back_default"
+              alt="Back"
+            />
+            <img
+              *ngIf="pokemon.sprites?.front_shiny"
+              [src]="pokemon.sprites.front_shiny"
+              alt="Shiny Front"
+            />
+            <img
+              *ngIf="pokemon.sprites?.back_shiny"
+              [src]="pokemon.sprites.back_shiny"
+              alt="Shiny Back"
+            />
+          </div>
+        </li>
+      </ul>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card *ngIf="error">
+    <ion-card-content class="error">{{ error }}</ion-card-content>
+  </ion-card>
+
+  <ion-card *ngIf="loading">
+    <ion-card-content>
+      <ion-spinner name="crescent"></ion-spinner>
+      <span class="loading-text">Carregando...</span>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

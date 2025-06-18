@@ -21,12 +21,15 @@
         (click)="loadPokemon()"
         >Buscar</ion-button
       >
-      <ion-icon name="search-outline"></ion-icon>
     </ion-item>
   </div>
 
   <div class="center-content">
-    <ion-card *ngIf="pokemon" class="pokemon-card animate-in">
+    <ion-card
+      *ngIf="pokemon"
+      [routerLink]="['/pokemon', pokemon.name]"
+      class="pokemon-card animate-in clickable-card"
+    >
       <ion-card-header>
         <ion-card-title>{{ pokemon.name | titlecase }}</ion-card-title>
       </ion-card-header>
@@ -36,6 +39,10 @@
           [alt]="pokemon.name"
           class="poke-img"
         />
+      </ion-card-content>
+      <ion-card-content class="card-footer">
+        <span>Ver detalhes</span>
+        <ion-icon name="arrow-forward-outline"></ion-icon>
       </ion-card-content>
     </ion-card>
 

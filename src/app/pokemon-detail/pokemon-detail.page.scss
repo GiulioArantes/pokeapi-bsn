@@ -1,0 +1,45 @@
+ion-card {
+  text-align: center;
+}
+.poke-img {
+  width: 180px;
+  height: 180px;
+  margin: 0 auto 12px auto;
+  background: #e9ecef;
+  border-radius: 50%;
+  box-shadow: 0 2px 8px rgba(34, 34, 59, 0.08);
+}
+.type-badge {
+  display: inline-block;
+  background: #a3a3a3;
+  color: #fff;
+  border-radius: 12px;
+  padding: 2px 12px;
+  margin: 0 4px;
+  font-size: 13px;
+}
+.poke-details {
+  text-align: left;
+  margin: 0 auto;
+  max-width: 320px;
+  font-size: 16px;
+  color: #4a4e69;
+  list-style: none;
+  padding: 0;
+}
+.sprite-list img {
+  width: 60px;
+  margin: 4px;
+  background: #f2e9e4;
+  border-radius: 8px;
+}
+.error {
+  color: #c9184a;
+  font-weight: 600;
+  font-size: 16px;
+}
+.loading-text {
+  margin-left: 12px;
+  color: #4a4e69;
+  font-size: 16px;
+}

@@ -51,6 +51,7 @@ ion-button {
 
 ion-card {
   text-align: center;
+  cursor: pointer;
 }
 
 ion-card-title {
@@ -68,6 +69,26 @@ ion-card-title {
   background: #e9ecef;
   border-radius: 50%;
   box-shadow: 0 2px 8px rgba(34, 34, 59, 0.08);
+}
+
+.clickable-card {
+  cursor: pointer;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.clickable-card:hover {
+  box-shadow: 0 6px 24px rgba(34, 34, 59, 0.18);
+  transform: translateY(-2px) scale(1.01);
+}
+.card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  color: #3b3b3b;
+  font-size: 15px;
+  font-weight: 500;
+  opacity: 0.85;
+  padding-top: 8px;
 }
 
 .error-card,
