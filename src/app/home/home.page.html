@@ -16,22 +16,16 @@
 
   <ion-card *ngIf="pokemon">
     <ion-card-header>
-      <ion-card-title>{{ pokemon.name | titlecase }}</ion-card-title>
+      <ion-card-title style="font-weight: bold; font-size: 22px"
+        >{{ pokemon.name | titlecase }}</ion-card-title
+      >
     </ion-card-header>
     <ion-card-content>
       <img
         [src]="pokemon.sprites?.front_default"
         [alt]="pokemon.name"
-        style="width: 120px; display: block; margin: 0 auto"
+        style="width: 250px; height: 250px; display: block; margin: 0 auto"
       />
-      <div>
-        <strong>Tipos:</strong>
-        <span *ngFor="let t of pokemon.types; let last = last">
-          {{ t.type.name | titlecase }}<span *ngIf="!last">, </span>
-        </span>
-      </div>
-      <div><strong>Altura:</strong> {{ pokemon.height / 10 }} m</div>
-      <div><strong>Peso:</strong> {{ pokemon.weight / 10 }} kg</div>
     </ion-card-content>
   </ion-card>
 

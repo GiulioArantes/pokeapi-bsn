@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NgIf, NgFor, TitleCasePipe } from '@angular/common';
+import { NgIf, TitleCasePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { PokemonService } from '../services/pokemon.service';
@@ -9,7 +9,7 @@ import { PokemonService } from '../services/pokemon.service';
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
   standalone: true,
-  imports: [NgFor, NgIf, FormsModule, TitleCasePipe, IonicModule],
+  imports: [NgIf, FormsModule, TitleCasePipe, IonicModule],
 })
 export class HomePage {
   pokemonName = '';
