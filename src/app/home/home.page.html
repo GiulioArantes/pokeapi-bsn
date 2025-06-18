@@ -1,20 +1,45 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
+    <ion-title>Buscar Pokémon</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding">
+  <ion-item>
+    <ion-input
+      [(ngModel)]="pokemonName"
+      placeholder="Digite o nome do Pokémon"
+      (keyup.enter)="loadPokemon()"
+    ></ion-input>
+    <ion-button (click)="loadPokemon()">Buscar</ion-button>
+  </ion-item>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+  <ion-card *ngIf="pokemon">
+    <ion-card-header>
+      <ion-card-title>{{ pokemon.name | titlecase }}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <img
+        [src]="pokemon.sprites?.front_default"
+        [alt]="pokemon.name"
+        style="width: 120px; display: block; margin: 0 auto"
+      />
+      <div>
+        <strong>Tipos:</strong>
+        <span *ngFor="let t of pokemon.types; let last = last">
+          {{ t.type.name | titlecase }}<span *ngIf="!last">, </span>
+        </span>
+      </div>
+      <div><strong>Altura:</strong> {{ pokemon.height / 10 }} m</div>
+      <div><strong>Peso:</strong> {{ pokemon.weight / 10 }} kg</div>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card *ngIf="error">
+    <ion-card-content style="color: red"> {{ error }} </ion-card-content>
+  </ion-card>
+
+  <ion-card *ngIf="loading">
+    <ion-card-content> Carregando... </ion-card-content>
+  </ion-card>
 </ion-content>
