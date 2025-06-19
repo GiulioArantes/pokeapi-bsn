@@ -43,3 +43,9 @@ ion-card {
   color: #4a4e69;
   font-size: 16px;
 }
+
+@media (min-width: 900px) {
+  .pokemon-card {
+    max-width: 420px;
+  }
+}

@@ -14,18 +14,14 @@
         clearInput
         inputmode="search"
       ></ion-input>
-      <ion-button
-        shape="round"
-        fill="solid"
-        color="primary"
-        (click)="loadPokemon()"
+      <ion-button shape="round" fill="solid" (click)="loadPokemon()"
         >Buscar</ion-button
       >
     </ion-item>
   </div>
 
   <div class="center-content">
-    <ion-card *ngIf="pokemon" class="pokemon-card animate-in clickable-card">
+    <ion-card *ngIf="pokemon" class="pokemon-card clickable-card">
       <ion-icon
         class="favorite-star"
         [name]="isFavorite(pokemon) ? 'star' : 'star-outline'"
@@ -54,28 +50,22 @@
     <div class="pagination-controls" *ngIf="pokemon">
       <ion-button
         fill="clear"
-        color="primary"
         (click)="prevPokemon()"
         [disabled]="!currentId || currentId <= 1"
       >
         <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
       </ion-button>
       <span class="pagination-id">#{{ currentId }}</span>
-      <ion-button
-        fill="clear"
-        color="primary"
-        (click)="nextPokemon()"
-        [disabled]="!currentId"
-      >
+      <ion-button fill="clear" (click)="nextPokemon()" [disabled]="!currentId">
         <ion-icon slot="icon-only" name="arrow-forward-outline"></ion-icon>
       </ion-button>
     </div>
 
-    <ion-card *ngIf="error" class="error-card animate-in">
+    <ion-card *ngIf="error" class="error-card">
       <ion-card-content class="error"> {{ error }} </ion-card-content>
     </ion-card>
 
-    <ion-card *ngIf="loading" class="loading-card animate-in">
+    <ion-card *ngIf="loading" class="loading-card">
       <ion-card-content>
         <ion-spinner name="crescent"></ion-spinner>
         <span class="loading-text">Carregando...</span>
@@ -96,7 +86,7 @@
   >
     <div class="drag-handle"></div>
     <div class="favorites-list">
-      <ion-list *ngIf="favorites.length > 0; else noFavorites">
+      <ion-list *ngIf="favorites.length > 0">
         <ion-item
           button
           *ngFor="let fav of favorites"
@@ -108,7 +98,6 @@
           <ion-label>{{ fav.name | titlecase }}</ion-label>
         </ion-item>
       </ion-list>
-      <ng-template #noFavorites> </ng-template>
     </div>
   </div>
 </ion-content>

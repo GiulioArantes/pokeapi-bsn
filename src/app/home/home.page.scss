@@ -213,3 +213,30 @@ ion-card-title {
     transform: translateY(0);
   }
 }
+
+@media (max-width: 480px) {
+  .pokemon-card,
+  .error-card,
+  .loading-card {
+    max-width: 98vw;
+    border-radius: 12px;
+  }
+  .poke-img {
+    width: 120px !important;
+    height: 120px !important;
+  }
+  .favorites-bar {
+    font-size: 16px;
+    padding: 8px 18px 8px 12px;
+  }
+  .favorites-bottom-sheet {
+    border-radius: 12px 12px 0 0;
+  }
+  .poke-details {
+    font-size: 14px;
+    max-width: 98vw;
+  }
+  .sprite-list img {
+    width: 40px;
+  }
+}
