@@ -25,25 +25,30 @@
   </div>
 
   <div class="center-content">
-    <ion-card
-      *ngIf="pokemon"
-      [routerLink]="['/pokemon', pokemon.name]"
-      class="pokemon-card animate-in clickable-card"
-    >
-      <ion-card-header>
-        <ion-card-title>{{ pokemon.name | titlecase }}</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        <img
-          [src]="pokemon.sprites?.front_default"
-          [alt]="pokemon.name"
-          class="poke-img"
-        />
-      </ion-card-content>
-      <ion-card-content class="card-footer">
-        <span>Ver detalhes</span>
-        <ion-icon name="arrow-forward-outline"></ion-icon>
-      </ion-card-content>
+    <ion-card *ngIf="pokemon" class="pokemon-card animate-in clickable-card">
+      <ion-icon
+        class="favorite-star"
+        [name]="isFavorite(pokemon) ? 'star' : 'star-outline'"
+        [color]="isFavorite(pokemon) ? 'warning' : 'medium'"
+        (click)="toggleFavorite(pokemon, $event); $event.stopPropagation();"
+      ></ion-icon>
+
+      <div class="card-content" [routerLink]="['/pokemon', pokemon.name]">
+        <ion-card-header>
+          <ion-card-title>{{ pokemon.name | titlecase }}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <img
+            [src]="pokemon.sprites?.front_default"
+            [alt]="pokemon.name"
+            class="poke-img"
+          />
+        </ion-card-content>
+        <ion-card-content class="card-footer">
+          <span>Ver detalhes</span>
+          <ion-icon name="arrow-forward-outline"></ion-icon>
+        </ion-card-content>
+      </div>
     </ion-card>
 
     <div class="pagination-controls" *ngIf="pokemon">
@@ -76,5 +81,34 @@
         <span class="loading-text">Carregando...</span>
       </ion-card-content>
     </ion-card>
+  </div>
+
+  <div class="favorites-bar" (click)="openBottomSheet()" tabindex="0">
+    <ion-icon name="chevron-up-outline"></ion-icon>
+    <span>Favoritos</span>
+  </div>
+
+  <div
+    class="favorites-bottom-sheet"
+    [class.open]="bottomSheetOpen"
+    (mousedown)="startDrag($event)"
+    (touchstart)="startDrag($event)"
+  >
+    <div class="drag-handle"></div>
+    <div class="favorites-list">
+      <ion-list *ngIf="favorites.length > 0; else noFavorites">
+        <ion-item
+          button
+          *ngFor="let fav of favorites"
+          (click)="selectFavorite(fav)"
+        >
+          <ion-avatar slot="start">
+            <img [src]="fav.sprites?.front_default" [alt]="fav.name" />
+          </ion-avatar>
+          <ion-label>{{ fav.name | titlecase }}</ion-label>
+        </ion-item>
+      </ion-list>
+      <ng-template #noFavorites> </ng-template>
+    </div>
   </div>
 </ion-content>
