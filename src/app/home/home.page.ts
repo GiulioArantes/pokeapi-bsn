@@ -5,10 +5,11 @@ import { IonicModule } from '@ionic/angular';
 import { PokemonService } from '../services/pokemon.service';
 import { RouterLink } from '@angular/router';
 import { addIcons } from 'ionicons';
-import { arrowForwardOutline } from 'ionicons/icons';
+import { arrowBackOutline, arrowForwardOutline } from 'ionicons/icons';
 
 addIcons({
   'arrow-forward-outline': arrowForwardOutline,
+  'arrow-back-outline': arrowBackOutline,
 });
 
 @Component({
@@ -23,11 +24,15 @@ export class HomePage {
   pokemon: any = null;
   loading = false;
   error = '';
+  currentId: number | null = null;
 
   constructor(private pokemonService: PokemonService) {}
 
-  loadPokemon() {
-    if (!this.pokemonName) {
+  loadPokemon(pokemonParam?: string | number) {
+    const query =
+      pokemonParam ??
+      (this.pokemonName ? this.pokemonName.toLowerCase() : this.currentId);
+    if (!query) {
       this.pokemon = null;
       this.error = 'Digite o nome de um Pokémon!';
       return;
@@ -36,9 +41,11 @@ export class HomePage {
     this.error = '';
     this.pokemon = null;
 
-    this.pokemonService.getPokemon(this.pokemonName.toLowerCase()).subscribe({
+    this.pokemonService.getPokemon(query).subscribe({
       next: (data) => {
         this.pokemon = data;
+        this.currentId = data.id;
+        this.pokemonName = data.name;
         this.loading = false;
       },
       error: () => {
@@ -46,5 +53,17 @@ export class HomePage {
         this.loading = false;
       },
     });
+  }
+
+  nextPokemon() {
+    if (this.currentId) {
+      this.loadPokemon(this.currentId + 1);
+    }
+  }
+
+  prevPokemon() {
+    if (this.currentId && this.currentId > 1) {
+      this.loadPokemon(this.currentId - 1);
+    }
   }
 }

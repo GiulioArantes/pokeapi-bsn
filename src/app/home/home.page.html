@@ -46,6 +46,26 @@
       </ion-card-content>
     </ion-card>
 
+    <div class="pagination-controls" *ngIf="pokemon">
+      <ion-button
+        fill="clear"
+        color="primary"
+        (click)="prevPokemon()"
+        [disabled]="!currentId || currentId <= 1"
+      >
+        <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+      </ion-button>
+      <span class="pagination-id">#{{ currentId }}</span>
+      <ion-button
+        fill="clear"
+        color="primary"
+        (click)="nextPokemon()"
+        [disabled]="!currentId"
+      >
+        <ion-icon slot="icon-only" name="arrow-forward-outline"></ion-icon>
+      </ion-button>
+    </div>
+
     <ion-card *ngIf="error" class="error-card animate-in">
       <ion-card-content class="error"> {{ error }} </ion-card-content>
     </ion-card>
